@@ -2,20 +2,30 @@
 # SPDX-License-Identifier: APACHE-2.0
 
 services:
-  mysql:
-    image: mysql:8.0
+  # mysql:
+  #   image: mysql:8.0
+  #   environment:
+  #     # ALLOW_EMPTY_PASSWORD is recommended only for development.
+  #     - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+  #     - MYSQL_USER=bn_moodle
+  #     - MYSQL_DATABASE=bitnami_moodle
+  #     - MYSQL_PASSWORD=bitnami
+  #     - MYSQL_CHARACTER_SET=utf8mb4
+  #     - MYSQL_COLLATE=utf8mb4_unicode_ci
+  #   volumes:
+  #     - "mysql_data:/var/lib/mysql"
+  #   ports:
+  #     - "3306:3306"
+  postgres:
+    image: postgres:16
     environment:
-      # ALLOW_EMPTY_PASSWORD is recommended only for development.
-      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
-      - MYSQL_USER=bn_moodle
-      - MYSQL_DATABASE=bitnami_moodle
-      - MYSQL_PASSWORD=bitnami
-      - MYSQL_CHARACTER_SET=utf8mb4
-      - MYSQL_COLLATE=utf8mb4_unicode_ci
+      - POSTGRES_USER=bn_moodle
+      - POSTGRES_PASSWORD=bitnami
+      - POSTGRES_DB=bitnami_moodle
     volumes:
-      - "mysql_data:/var/lib/mysql"
+      - "postgres_data:/var/lib/postgresql/data"
     ports:
-      - "3306:3306"
+      - "5432:5432"
   moodle:
     build: .
     # image: bitnami/moodle:4.5
@@ -23,21 +33,27 @@ services:
       - "8080:8080"
       - "8443:8443"
     environment:
-      - MOODLE_DATABASE_TYPE=mysqli
-      - MOODLE_DATABASE_HOST=mysql
-      - MOODLE_DATABASE_PORT_NUMBER=3306
+      # - MOODLE_DATABASE_TYPE=mysqli
+      # - MOODLE_DATABASE_HOST=mysql
+      # - MOODLE_DATABASE_PORT_NUMBER=3306
+      - MOODLE_DATABASE_TYPE=pgsql
+      - MOODLE_DATABASE_HOST=postgres
+      - MOODLE_DATABASE_PORT_NUMBER=5432
       - MOODLE_DATABASE_USER=bn_moodle
       - MOODLE_DATABASE_NAME=bitnami_moodle
       - MOODLE_DATABASE_PASSWORD=bitnami
       # ALLOW_EMPTY_PASSWORD is recommended only for development.
-      - ALLOW_EMPTY_PASSWORD=yes
+      # - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - "moodle_data:/bitnami/moodle"
       - "moodledata_data:/bitnami/moodledata"
     depends_on:
-      - mysql
+      # - mysql
+      - postgres
 volumes:
   mysql_data:
+    driver: local
+  postgres_data:
     driver: local
   moodle_data:
     driver: local
