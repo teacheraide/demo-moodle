@@ -49,7 +49,9 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           push: true
-          tags: ${{ env.REGISTRY }}/${{ env.REPO }}:${{ github.sha }}
+          tags: |
+            ${{ env.REGISTRY }}/${{ env.REPO }}:${{ github.sha }}
+            ${{ env.REGISTRY }}/${{ env.REPO }}:latest
           file: ./Dockerfile
 
   # deploy:
