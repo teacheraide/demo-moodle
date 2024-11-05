@@ -55,7 +55,7 @@ jobs:
       #     file: ./Dockerfile
 
       - name: Google Artifact Registry Build & Push
-        uses: piotrkrusinski/action-google-artifact-registry@v1
+        uses: piotrkrusinski/action-google-artifact-registry@v1.0
         with:
           google_project_id: teacheraide-440812
           google_artifact_registry_region: australia-southeast1
