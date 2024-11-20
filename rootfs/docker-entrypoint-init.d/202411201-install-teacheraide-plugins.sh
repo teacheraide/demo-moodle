@@ -34,10 +34,11 @@ download_and_extract() {
 
   info "Extracting tarball"
   tar --strip-components=1 -xzvf "$download_dir/$tarball_name" -C "$download_dir"
+  rm -f "$download_dir/$tarball_name"
 }
 
-local_teacheraide_release="v0.2.0"
-tiny_teacheraide_release="v0.1.0"
+local_teacheraide_release="v0.3.0"
+tiny_teacheraide_release="v0.2.0"
 
 info "Installing Teacheraide local plugin $local_teacheraide_release"
 
