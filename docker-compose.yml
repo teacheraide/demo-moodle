@@ -47,6 +47,8 @@ services:
     volumes:
       - "moodle_data:/bitnami/moodle"
       - "moodledata_data:/bitnami/moodledata"
+      # - "./moodle/local/teacheraide:/bitnami/moodle/local/teacheraide"
+      # - "./moodle/lib/editor/tiny/plugins/teacheraide:/bitnami/moodle/lib/editor/tiny/plugins/teacheraide"
     depends_on:
       # - mysql
       - postgres
