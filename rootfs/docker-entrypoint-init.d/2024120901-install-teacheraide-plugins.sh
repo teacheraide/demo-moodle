@@ -37,7 +37,7 @@ download_and_extract() {
   rm -f "$download_dir/$tarball_name"
 }
 
-local_teacheraide_release="v1.0.1"
+local_teacheraide_release="v1.0.2"
 tiny_teacheraide_release="v1.0.0"
 
 info "Installing Teacheraide local plugin $local_teacheraide_release"
