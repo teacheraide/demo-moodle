@@ -1,7 +1,7 @@
 # demo-moodle
 
 demo moodle docker for teacheraide moodle plugins
-- base on https://hub.docker.com/r/bitnami/moodle:4.5
+- base on [bitnami/moodle:4.5](https://hub.docker.com/r/bitnami/moodle)
 
 ## Start Locally
 
